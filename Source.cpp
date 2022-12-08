@@ -54,19 +54,19 @@ int String::amountOfStrings = 0;
 
 int main()
 {
-	std::cout << "f_o" << std::endl;
+	std::cout << "First string: " << std::endl;
 	String obj;
 	obj.Output();
 
-	std::cout << "s_o" << std::endl;
+	std::cout << "Second string: " << std::endl;
 	String obj1(22);
 	obj1.Output();
 
-	std::cout << "th_o" << std::endl;
+	std::cout << "Third string:" << std::endl;
 	String obj2("Hello World!!!");
 	obj2.Output();
 
-	std::cout << "fr_o" << std::endl;
+	std::cout << "Fourth string:" << std::endl;
 	String obj3(5, 10);
 	obj3.Output();
 	std::cout << String::amountOfStrings << std::endl;
