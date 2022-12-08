@@ -69,6 +69,6 @@ int main()
 	std::cout << "Fourth string:" << std::endl;
 	String obj3(5, 10);
 	obj3.Output();
-	std::cout << String::amountOfStrings << std::endl;
+	std::cout<< "Amount of strings: " << String::amountOfStrings << std::endl;
 	return 0;
 }
