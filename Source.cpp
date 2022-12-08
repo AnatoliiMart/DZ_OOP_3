@@ -6,6 +6,7 @@ public:
 	static int amountOfStrings;
 	String()
 	{
+		str = new char[0];
 		std::cin.getline(str, 80);
 		amountOfStrings++;
 	}
@@ -15,27 +16,27 @@ public:
 		std::cin.getline(str, bufSize);
 		amountOfStrings++;
 	}
-	String(const char* str)
+	String(const char* Str)
 	{
-		str = new char[strlen(str + 1)];
-		strcpy_s(this->str, strlen(str + 1), str);
+		int size = strlen(Str) + 1;
+		str = new char[size];
+		strcpy_s(str, strlen(Str) + 1, Str);
 		amountOfStrings++;
 	}
-	String(char str)
+	String(int size, int size2)
 	{
-		
 		InputString();
-	  Output();
 		amountOfStrings++;
 	}
 	void InputString()
 	{
-		str = new char[1];
-		std::cin.getline(str, strlen(str + 1));
+		str = new char[BUFSIZ];
+		std::cin.getline(str, 150);
 	}
 	void Output()
 	{
 		std::cout << "Entered string: " << str;
+		std::cout << std::endl;
 	}
 	static int GetAmount()
 	{
@@ -45,8 +46,6 @@ public:
 	{
 		delete[] str;
 	}
-	
-
 private:
 	char* str;
 };
@@ -55,16 +54,21 @@ int String::amountOfStrings = 0;
 
 int main()
 {
-	std::cout << String::amountOfStrings << std::endl;
+	std::cout << "f_o" << std::endl;
 	String obj;
 	obj.Output();
+
+	std::cout << "s_o" << std::endl;
 	String obj1(22);
 	obj1.Output();
-	String obj2("Hello World");
-	obj2.Output();
-	char str[100];
-	String obj3(str);
-	
-	std::cout << String::amountOfStrings << std::endl;
 
+	std::cout << "th_o" << std::endl;
+	String obj2("Hello World!!!");
+	obj2.Output();
+
+	std::cout << "fr_o" << std::endl;
+	String obj3(5, 10);
+	obj3.Output();
+	std::cout << String::amountOfStrings << std::endl;
+	return 0;
 }
