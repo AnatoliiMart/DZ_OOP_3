@@ -54,19 +54,19 @@ int String::amountOfStrings = 0;
 
 int main()
 {
-	std::cout << "First string: " << std::endl;
+	std::cout << "First string (constructor by default): " << std::endl;
 	String obj;
 	obj.Output();
 
-	std::cout << "Second string: " << std::endl;
+	std::cout << "Second string (constructor with parameter of buffer size): " << std::endl;
 	String obj1(22);
 	obj1.Output();
 
-	std::cout << "Third string:" << std::endl;
+	std::cout << "Third string (constructor with parameter of string): " << std::endl;
 	String obj2("Hello World!!!");
 	obj2.Output();
 
-	std::cout << "Fourth string:" << std::endl;
+	std::cout << "Fourth string (constructor with fake paramerters): " << std::endl;
 	String obj3(5, 10);
 	obj3.Output();
 	std::cout<< "Amount of strings: " << String::amountOfStrings << std::endl;
