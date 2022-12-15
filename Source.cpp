@@ -84,7 +84,7 @@ int main()
 	obj2.Output();
 
 	String obj4(obj2);
-	std::cout<<"Copy one obj into another (copy constructor):"
-
+	std::cout << "Copy one obj into another (copy constructor):";
+	obj4.Output();
 	return 0;
 }
