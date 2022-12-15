@@ -79,8 +79,12 @@ int main()
 	obj3.Output();
 	std::cout<< "Amount of strings: " << String::amountOfStrings << std::endl;
 
-	String obj4(obj2);
 	std::cout << "Concatenated strings (overload operator+): \n";
-	obj4.Output();
+	obj2 + obj1;
+	obj2.Output();
+
+	String obj4(obj2);
+	std::cout<<"Copy one obj into another (copy constructor):"
+
 	return 0;
 }
