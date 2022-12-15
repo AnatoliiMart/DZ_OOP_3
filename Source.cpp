@@ -53,6 +53,10 @@ public:
 		str = new char[strlen(obj.str)+1];
 		strcpy(str, obj.str);
 	}
+	bool operator < (const String& obj)
+	{
+		return strcmp(this->str, obj.str) < 0 ? true : false;
+	}
 private:
 	char* str;
 };
@@ -75,16 +79,19 @@ int main()
 	
 	std::cout << "Fourth string (constructor with fake paramerters): " << std::endl;
 	String obj3(5, 10);
-
 	obj3.Output();
-	std::cout<< "Amount of strings: " << String::amountOfStrings << std::endl;
-
+	
 	std::cout << "Concatenated strings (overload operator+): \n";
 	obj2 + obj1;
 	obj2.Output();
 
+  bool correct = obj2 < obj1;
+	std::cout << "Overload operator < : " << correct << std::endl;
+
 	String obj4(obj2);
 	std::cout << "Copy one obj into another (copy constructor):";
 	obj4.Output();
+
+	std::cout << "Amount of strings: " << String::amountOfStrings << std::endl;
 	return 0;
 }
