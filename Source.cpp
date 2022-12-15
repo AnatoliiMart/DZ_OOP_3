@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 
 class String
@@ -18,7 +19,7 @@ public:
 	}
 	String(const char* Str)
 	{
-		int size = strlen(Str) + 1;
+		size_t size = strlen(Str) + 1;
 		str = new char[size];
 		strcpy_s(str, strlen(Str) + 1, Str);
 		amountOfStrings++;
@@ -30,7 +31,7 @@ public:
 	}
 	void InputString()
 	{
-		str = new char[BUFSIZ];
+		str = new char[150];
 		std::cin.getline(str, 150);
 	}
 	void Output()
@@ -42,9 +43,15 @@ public:
 	{
 		return amountOfStrings;
 	}
-	~String()
+	String operator+(const String& obj)												 //operator+ (strcat)
 	{
-		delete[] str;
+		strcat(this->str, obj.str);
+		return *this;
+	}    
+	String(const String& obj)																	// copy constructor
+	{
+		str = new char[strlen(obj.str)+1];
+		strcpy(str, obj.str);
 	}
 private:
 	char* str;
@@ -65,10 +72,15 @@ int main()
 	std::cout << "Third string (constructor with parameter of string): " << std::endl;
 	String obj2("Hello World!!!");
 	obj2.Output();
-
+	
 	std::cout << "Fourth string (constructor with fake paramerters): " << std::endl;
 	String obj3(5, 10);
+
 	obj3.Output();
 	std::cout<< "Amount of strings: " << String::amountOfStrings << std::endl;
+
+	String obj4(obj2);
+	std::cout << "Concatenated strings (overload operator+): \n";
+	obj4.Output();
 	return 0;
 }
