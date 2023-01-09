@@ -1,109 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
+#include"String.h"
 
-class String
-{
-public:
-	static int amountOfStrings;
-	String()
-	{
-		str = new char[0];
-		std::cin.getline(str, 80);
-		amountOfStrings++;
-	}
-	String(const int bufSize)
-	{
-		str = new char[bufSize + 1];
-		std::cin.getline(str, bufSize);
-		amountOfStrings++;
-	}
-	String(const char* Str)
-	{
-		size_t size = strlen(Str) + 1;
-		str = new char[size];
-		strcpy_s(str, strlen(Str) + 1, Str);
-		amountOfStrings++;
-	}
-	String(int size, int size2)
-	{
-		InputString();
-		amountOfStrings++;
-	}
-	void InputString()
-	{
-		str = new char[150];
-		std::cin.getline(str, 150);
-	}
-	void Output()
-	{
-		std::cout << "Entered string: " << str;
-		std::cout << std::endl;
-	}
-	static int GetAmount()
-	{
-		return amountOfStrings;
-	}
-	String operator+(const String& obj)												 //operator+ (strcat)
-	{
-		strcat(this->str, obj.str);
-		return *this;
-	}
-	String(const String& obj)														// copy constructor
-	{
-		str = new char[strlen(obj.str) + 1];
-		strcpy(str, obj.str);
-	}
-	bool operator < (const String& obj)
-	{
-		return strcmp(this->str, obj.str) < 0 ? true : false;
-	}
-	void SetStr(char* s)
-	{
-		size_t length = strlen(s);
-		str = new char[length + 1];
-		if (str)
-		{
-			strcpy_s(str, length +1, s);
-		}
-	}
-
-	char* GetStr() const
-	{
-		return str;
-	}
-	
-private:
-	char* str;
-};
-
-String operator+(int xCount, String Obj)                        
-{
-	char* tmpStr = new char[xCount + 1];                               
-	for (int i = 0; i <= xCount; i++)                              
-	{
-		if (i < xCount) 
-		{
-			tmpStr[i] = { 'x' };
-		}
-		else if (i == xCount) 
-		{
-			tmpStr[i] = '\0';
-		}
-	}
-	char* tmpStr1 = new char[strlen(tmpStr) + strlen(Obj.GetStr()) + 1]; 
-	strcpy(tmpStr1, tmpStr);                                            
-	strcat(tmpStr1, Obj.GetStr()); 
-
-	String temp;                                      
-	temp.SetStr(tmpStr1); 
-
-	delete[] tmpStr;
-	delete[] tmpStr1;
-
-	return temp;                                            
-}
-
-int String::amountOfStrings = 0;
 
 int main()
 {
@@ -144,6 +42,29 @@ int main()
 	
 	String obj6 = xAmount + obj5;
 	obj6.Output();
+
+	std::cout << "Overload operator++: " << std::endl;
+	String obj7("AAAAA");
+	obj7.Output();
+	obj7++;
+	obj7.Output();
+
+	std::cout << "Overload operator--: " << std::endl;
+	String obj8("BBBBB");
+	obj8.Output();
+	obj8--;
+	obj8.Output();
+
+	std::cout << "Overload operator+(int) to end of string: " << std::endl;
+	String obj9("CCCCC");
+	obj9.Output();
+	obj9 = obj9 + 2;
+	obj9.Output();
+
+	std::cout << "Overload operator-(int) out of the end of string: " << std::endl;
+	obj9 = obj9 - 4;
+	obj9.Output();
+
 
 	std::cout << "Amount of strings: " << String::amountOfStrings << std::endl;
 	return 0;
