@@ -59,11 +59,11 @@ public:
 	}
 	void SetStr(char* s)
 	{
-		int length = strlen(s);
+		size_t length = strlen(s);
 		str = new char[length + 1];
 		if (str)
 		{
-			strcpy_s(str, strlen(str), s);
+			strcpy_s(str, length +1, s);
 		}
 	}
 
