@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
+#include<string.h>
 #include"String.h"
 
 
@@ -65,7 +66,10 @@ int main()
 	obj9 = obj9 - 4;
 	obj9.Output();
 
-
+	String obj10("Moving");
+	obj10.Output();
+	obj10 = std::move(obj9);
+	obj10.Output();
 	std::cout << "Amount of strings: " << String::amountOfStrings << std::endl;
 	return 0;
 }

@@ -6,25 +6,25 @@ public:
 	static int amountOfStrings;
 	String()
 	{
-		length = 80;
-		str = new char[length + 1];
-		std::cin.getline(str, length);
+		size = 80;
+		str = new char[size + 1];
+		std::cin.getline(str, size);
 		amountOfStrings++;
 	}
 
 	String(const int bufSize)
 	{
-		length = bufSize;
-		str = new char[length + 1];
-		std::cin.getline(str, length);
+		size = bufSize;
+		str = new char[size + 1];
+		std::cin.getline(str, size);
 		amountOfStrings++;
 	}
 
 	String(const char* Str)
 	{
-		length = strlen(Str) + 1;
-		str = new char[length];
-		strcpy_s(str, length, Str);
+		size = strlen(Str) + 1;
+		str = new char[size];
+		strcpy_s(str, size, Str);
 		amountOfStrings++;
 	}
 
@@ -36,15 +36,25 @@ public:
 
 	String(const String& obj)														// copy constructor
 	{
+		std::cout << "Copy constructor" << std::endl;
 		str = new char[strlen(obj.str) + 1];
 		strcpy(str, obj.str);
+	}
+	String(String&& obj)															// move constructor
+	{
+		std::cout << "Move constructor" << std::endl;
+		this->size = obj.size;
+		this->str = new char[size + 1];
+		strcpy_s(this->str, size + 1, obj.str);
+		obj.str = nullptr;
+		obj.size = 0;
 	}
 
 	void InputString()
 	{
-		length = 150;
-		str = new char[length];
-		std::cin.getline(str, length);
+		size = 150;
+		str = new char[size];
+		std::cin.getline(str, size);
 	}
 
 	void Output()
@@ -60,11 +70,11 @@ public:
 
 	void SetStr(char* s)
 	{
-		length = strlen(s);
-		str = new char[length + 1];
+		size = strlen(s);
+		str = new char[size + 1];
 		if (str)
 		{
-			strcpy_s(str, length + 1, s);
+			strcpy_s(str, size + 1, s);
 		}
 	}
 
@@ -73,24 +83,24 @@ public:
 		return str;
 	}
 
-	bool   operator < (const String& obj)
+	bool   operator  < (const String& obj)
 	{
 		return strcmp(this->str, obj.str) < 0 ? true : false;
 	}
 
-	String operator+  (const String& obj)												 //operator+ (strcat)
+	String operator  +  (const String& obj)												 //operator+ (strcat)
 	{
 		strcat(this->str, obj.str);
 		return *this;
 	}
 
-	String operator++ (int)
+	String operator  ++ (int)
 	{
 		char* tmpStr = new char[2] {"x"};
 		String tmp;
 
-		tmp.length = length + strlen(tmpStr) + 1;
-		tmp.str = new char[tmp.length];
+		tmp.size = size + strlen(tmpStr) + 1;
+		tmp.str = new char[tmp.size];
 		strcpy(tmp.str, str);
 		strcat(tmp.str, tmpStr);
 
@@ -99,7 +109,7 @@ public:
 			delete[] str;
 		}
 
-		str = new char[tmp.length];
+		str = new char[tmp.size];
 		strcpy(str, tmp.str);
 
 		delete[] tmpStr;
@@ -107,14 +117,14 @@ public:
 		return *this;
 	}
 
-	String operator-- (int)
+	String operator  -- (int)
 	{
 		String tmp;
 
-		tmp.length = strlen(str);
-		tmp.str = new char[tmp.length];
+		tmp.size = strlen(str);
+		tmp.str = new char[tmp.size];
 		size_t i = 0;
-		for (; i < tmp.length - 1; i++)
+		for (; i < tmp.size - 1; i++)
 		{
 			tmp.str[i] = str[i];
 		}
@@ -125,13 +135,13 @@ public:
 			delete[] str;
 		}
 
-		str = new char[tmp.length];
+		str = new char[tmp.size];
 		strcpy(str, tmp.str);
 
 		return *this;
 	}
 
-	String operator+  (int x)
+	String operator  +  (int x)
 	{
 		char* tmpStr = new char[x + 1];
 		for (size_t i = 0; i <= x; i++)
@@ -147,35 +157,48 @@ public:
 		}
 
 		String tmp;
-		tmp.length = length + strlen(tmpStr);
-		tmp.str = new char[tmp.length + 1];
+		tmp.size = size + strlen(tmpStr);
+		tmp.str = new char[tmp.size + 1];
 		strcpy(tmp.str, str);
 		strcat(tmp.str, tmpStr);
 		delete[] tmpStr;
 		return tmp;
 	}
 
-	String operator-  (int x)
+	String operator  -  (int x)
 	{
 		String tmp;
-		tmp.length = strlen(str) - x;
-		tmp.str = new char[tmp.length + 1];
+		tmp.size = strlen(str) - x;
+		tmp.str = new char[tmp.size + 1];
 
-		for (size_t i = 0; i <= tmp.length; i++)
+		for (size_t i = 0; i <= tmp.size; i++)
 		{
-			if (i < tmp.length)
+			if (i < tmp.size)
 			{
 				tmp.str[i] = str[i];
 			}
-			else if (i == tmp.length)
+			else if (i == tmp.size)
 			{
 				tmp.str[i] = '\0';
 			}
 		}
 		return tmp;
 	}
+	String& operator = (String&& object)         
+	{
+		std::cout << "Assignment operator for the shuffle constructor\n";
+		if (!(this == &object))                              
+		{
+			delete[] str;
+			str = object.str;
+			size = object.size;
+			object.str = nullptr;
+			object.size = 0;
+		}
+		return *this;
+	}
 private:
-	size_t length = 0;
+	size_t size = 0;
 	char* str;
 };
 
