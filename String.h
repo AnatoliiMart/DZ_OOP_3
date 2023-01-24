@@ -40,12 +40,11 @@ public:
 		str = new char[strlen(obj.str) + 1];
 		strcpy(str, obj.str);
 	}
-	String(String&& obj)															// move constructor
+	String(String&& obj) noexcept															// move constructor
 	{
 		std::cout << "Move constructor" << std::endl;
 		this->size = obj.size;
-		this->str = new char[size + 1];
-		strcpy_s(this->str, size + 1, obj.str);
+		this->str = obj.str;
 		obj.str = nullptr;
 		obj.size = 0;
 	}
@@ -184,7 +183,7 @@ public:
 		}
 		return tmp;
 	}
-	String& operator = (String&& object)         
+	String& operator = (String&& object)    noexcept     
 	{
 		std::cout << "Assignment operator for the shuffle constructor\n";
 		if (!(this == &object))                              
