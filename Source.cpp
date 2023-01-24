@@ -70,6 +70,10 @@ int main()
 	obj10.Output();
 	obj10 = std::move(obj9);
 	obj10.Output();
+
+	std::cout << "Initializer List use" << std::endl;
+	String obj11{ '1','2', '3', '4', '5','\0'};
+	obj11.Output();
 	std::cout << "Amount of strings: " << String::amountOfStrings << std::endl;
 	return 0;
 }

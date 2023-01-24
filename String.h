@@ -48,6 +48,17 @@ public:
 		obj.str = nullptr;
 		obj.size = 0;
 	}
+	String(const std::initializer_list<char>& list) : String(list.size())  // InitializerList Constructor
+	{
+		size = list.size();
+		for (auto ptr = list.begin(); ptr != list.end(); ptr++)
+		{
+			*str = *ptr;
+			str++;
+		}
+		str -= size; 
+		amountOfStrings++;
+	}
 
 	void InputString()
 	{
