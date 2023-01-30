@@ -62,6 +62,7 @@ public:
 
 	void InputString()
 	{
+		std::cout << "Enter your string: " << std::endl;
 		size = 150;
 		str = new char[size];
 		std::cin.getline(str, size);
@@ -193,6 +194,29 @@ public:
 			}
 		}
 		return tmp;
+	}
+	String operator  = (String& object)
+	{
+		if (this != &object)
+		{
+			if (object.str == nullptr)
+			{
+				str = nullptr;
+				size = object.size;
+				return *this;
+			}
+			else if (str == nullptr)
+			{
+				delete[] str;
+			}
+			else
+			{
+				size = object.size + 1;
+				str = new char[strlen(object.str) + 1];
+				strcpy_s(str, size, object.str);
+			}
+		}
+		return *this;
 	}
 	String& operator = (String&& object)    noexcept     
 	{
